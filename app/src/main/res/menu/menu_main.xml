@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".MainActivity">
+    <item
+        android:id="@+id/tick"
+        android:orderInCategory="100"
+        android:title="tick"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/progress"
+        android:orderInCategory="100"
+        android:title="Pr"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/fail"
+        android:orderInCategory="100"
+        android:title="F"
+        app:showAsAction="always"/>
+</menu>
