@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SweetAlertLayout">
+        <!-- Text-->
+        <attr name="sal_radius" format="float"/>
+        <attr name="sal_rect_weight" format="float"/>
+        <attr name="sal_left_rect_w" format="float"/>
+        <attr name="sal_right_rect_w" format="float"/>
+        <attr name="sal_min_left_rect_w" format="float"/>
+        <attr name="sal_min_right_rect_w" format="float"/>
+        <attr name="sal_progress_radius" format="integer"/>
+    </declare-styleable>
+</resources>

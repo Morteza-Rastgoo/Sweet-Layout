@@ -10,12 +10,21 @@
                 tools:context="cn.pedant.SweetAlert.sample.Main2Activity">
 
     <FrameLayout
-        android:layout_width="200dp"
-        android:layout_height="200dp">
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true">
 
-        <cn.pedant.SweetAlert.sample.SweetAlertLayout
+        <com.mrastgoo.sweetalert.SweetAlertLayout
             android:id="@+id/sweet"
+            xmlns:SweetAlertLayout="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            SweetAlertLayout:sal_progress_radius="160"
+            SweetAlertLayout:sal_left_rect_w="30"
+            SweetAlertLayout:sal_min_left_rect_w="25"
+            SweetAlertLayout:sal_min_right_rect_w="45"
+            SweetAlertLayout:sal_radius="0.1"
+            SweetAlertLayout:sal_rect_weight="4"
+            SweetAlertLayout:sal_right_rect_w="50"/>
     </FrameLayout>
 </RelativeLayout>

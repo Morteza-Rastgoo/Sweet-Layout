@@ -1,6 +1,7 @@
 package com.mrastgoo.sweetalert;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -23,7 +24,6 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.OptAnimationLoader;
 import cn.pedant.SweetAlert.ProgressHelper;
-import cn.pedant.SweetAlert.SuccessTickView;
 
 /**
  * Created by m.rastgoo on 11/15/15 AD.
@@ -85,9 +85,13 @@ public class SweetAlertLayout extends RelativeLayout implements View.OnClickList
         super(context, attrs);
         mContext = context;
         init(context);
+        parseAttributes(context.obtainStyledAttributes(attrs, R.styleable.SweetAlertLayout));
     }
 
     private void init(Context context) {
+        if (isInEditMode()) {
+            return;
+        }
         Log.d(TAG, "Init");
         inflate(context, R.layout.layout_sweet_alert, this);
 
@@ -176,6 +180,15 @@ public class SweetAlertLayout extends RelativeLayout implements View.OnClickList
         changeAlertType(mAlertType, true);
     }
 
+    private void parseAttributes(TypedArray a) {
+        mSuccessTick.setRadius(a.getFloat(R.styleable.SweetAlertLayout_sal_radius, 10));
+        mSuccessTick.setRectWeight(a.getFloat(R.styleable.SweetAlertLayout_sal_rect_weight, 4));
+        mSuccessTick.setLeftRectWidth(a.getFloat(R.styleable.SweetAlertLayout_sal_left_rect_w, 25));
+        mSuccessTick.setRightRectWidth(a.getFloat(R.styleable.SweetAlertLayout_sal_right_rect_w, 45));
+        int progressRadius = a.getInt(R.styleable.SweetAlertLayout_sal_progress_radius, 100);
+        mProgressHelper.setCircleRadius((int) mSuccessTick.dip2px(progressRadius));
+    }
+
     private WindowManager getWindow() {
         return (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
     }
@@ -190,6 +203,7 @@ public class SweetAlertLayout extends RelativeLayout implements View.OnClickList
 
         mConfirmButton.setBackgroundResource(R.drawable.blue_button_background);
         mErrorFrame.clearAnimation();
+        mWarningFrame.clearAnimation();
         mErrorX.clearAnimation();
         mSuccessTick.clearAnimation();
         mSuccessLeftMask.clearAnimation();
@@ -200,6 +214,8 @@ public class SweetAlertLayout extends RelativeLayout implements View.OnClickList
         if (mAlertType == ERROR_TYPE) {
             mErrorFrame.startAnimation(mErrorInAnim);
             mErrorX.startAnimation(mErrorXInAnim);
+        } else if (mAlertType == WARNING_TYPE) {
+            mWarningFrame.startAnimation(mErrorInAnim);
         } else if (mAlertType == SUCCESS_TYPE) {
             mSuccessTick.startTickAnim();
             mSuccessRightMask.startAnimation(mSuccessBowAnim);
@@ -361,13 +377,14 @@ public class SweetAlertLayout extends RelativeLayout implements View.OnClickList
         dismissWithAnimation(true);
     }
 
-    *//**
+    */
+
+    /**
      * The real Dialog.dismiss() will be invoked async-ly after the animation finishes.
      *//*
     public void dismissWithAnimation() {
         dismissWithAnimation(false);
     }*/
-
     private void dismissWithAnimation(boolean fromCancel) {
         mCloseFromCancel = fromCancel;
         mConfirmButton.startAnimation(mOverlayOutAnim);

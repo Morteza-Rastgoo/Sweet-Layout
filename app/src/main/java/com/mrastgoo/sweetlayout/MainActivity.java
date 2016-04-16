@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 changeAlertType(PROGRESS_TYPE);
                 return true;
             case R.id.fail:
-                changeAlertType(ERROR_TYPE);
+                changeAlertType(WARNING_TYPE);
                 return true;
             case R.id.tick:
                 changeAlertType(SUCCESS_TYPE);
